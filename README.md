@@ -1,36 +1,180 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# PR Manager - 広報業務管理アプリ
 
-## Getting Started
+広報業務を一元管理するための社内向けWebアプリケーションです。情報収集・企画・制作・承認・投稿・効果測定までの広報業務全体をカバーします。
 
-First, run the development server:
+## 技術構成
+
+| 項目 | 技術 |
+|------|------|
+| フレームワーク | Next.js 16 (App Router) |
+| 言語 | TypeScript |
+| スタイリング | Tailwind CSS v4 |
+| 状態管理 | Zustand |
+| グラフ | Recharts |
+| アイコン | Lucide React |
+| 日付処理 | date-fns |
+
+## セットアップ
+
+### 前提条件
+- Node.js 18以上
+- npm 9以上
+
+### インストール
+
+```bash
+cd pr-manager
+npm install
+```
+
+### 開発サーバー起動
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+ブラウザで http://localhost:3000 を開いてください。
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 本番ビルド
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+npm start
+```
 
-## Learn More
+## 機能一覧
 
-To learn more about Next.js, take a look at the following resources:
+### 1. ダッシュボード
+- 今日のタスク数、承認待ち、投稿予定、案件数の統計
+- SNS簡易実績（投稿数・反応数・問い合わせ数）
+- 承認待ち一覧、投稿予定、進行中案件
+- イベント情報、お知らせ表示
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 2. 広報ネタ管理
+- リスト/カンバンの2モード切替
+- 検索・ステータスフィルタリング
+- 新規登録フォーム（バリデーション付き）
+- 詳細画面
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### 3. コンテンツカレンダー
+- 月間カレンダービュー
+- 日付クリックで企画詳細表示
+- 月間一覧テーブル
+- 新規企画作成
 
-## Deploy on Vercel
+### 4. SNS投稿管理
+- カード形式の投稿一覧
+- 投稿作成フォーム（Instagram風プレビュー付き）
+- ハッシュタグリアルタイム表示
+- 媒体別複製機能
+- 詳細画面
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### 5. プレスリリース管理
+- リリース一覧
+- Word風の作成・表示UI
+- 承認申請ボタン
+- 配信先管理
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### 6. メディア管理
+- メディア・記者カード一覧
+- 対応履歴タイムライン
+- 掲載実績一覧
+- 連絡先情報管理
+
+### 7. 素材管理
+- グリッド/リストの2モード切替
+- ファイル種別アイコン表示
+- タグ検索・種別フィルター
+- アップロード（UI）
+
+### 8. 承認フロー
+- ステータス別フィルタータブ
+- 承認/差し戻しボタン
+- コメント表示
+- 承認履歴
+
+### 9. 効果測定・レポート
+- Rechartsによるグラフ表示（棒グラフ・折れ線・円グラフ）
+- サマリーカード
+- 詳細テーブル
+- CSV出力機能
+
+### 10. イベント広報管理
+- 前/当日/後のフェーズ別タスク管理
+- チェックボックス式タスク
+- 写真回収チェック
+- イベント基本情報
+
+### 11. 緊急対応テンプレート
+- アコーディオン展開式一覧
+- カテゴリフィルター
+- 差し込み変数一覧
+- コピーボタン
+
+## 権限ロール
+
+| ロール | 権限 |
+|--------|------|
+| 管理者 | 全機能利用可 |
+| 広報担当 | 案件作成・編集・申請 |
+| 承認者 | 承認・差し戻し |
+| 閲覧者 | 閲覧のみ |
+| 現場担当 | ネタ投稿のみ |
+
+## デモ用ログイン
+
+ログイン画面のクイックログインボタンから、各ロールのユーザーでログインできます。
+
+| ユーザー | ロール | メール |
+|----------|--------|--------|
+| 田中太郎 | 管理者 | tanaka@example.com |
+| 鈴木花子 | 広報担当 | suzuki@example.com |
+| 佐藤次郎 | 承認者 | sato@example.com |
+| 山本美咲 | 閲覧者 | yamamoto@example.com |
+| 高橋健一 | 現場担当 | takahashi@example.com |
+
+## ディレクトリ構成
+
+```
+src/
+├── app/                      # Next.js App Router
+│   ├── page.tsx              # ログイン画面
+│   ├── layout.tsx            # ルートレイアウト
+│   ├── globals.css           # グローバルスタイル
+│   └── (dashboard)/          # 認証後レイアウトグループ
+│       ├── layout.tsx        # サイドバー付きレイアウト
+│       ├── dashboard/        # ダッシュボード
+│       ├── ideas/            # 広報ネタ管理
+│       ├── content-plans/    # コンテンツカレンダー
+│       ├── sns-posts/        # SNS投稿管理
+│       ├── press-releases/   # プレスリリース
+│       ├── media/            # メディア管理
+│       ├── assets/           # 素材管理
+│       ├── approvals/        # 承認一覧
+│       ├── analytics/        # 効果測定
+│       ├── events/           # イベント管理
+│       └── templates/        # 緊急テンプレート
+├── components/
+│   └── layout/               # レイアウトコンポーネント
+├── lib/
+│   ├── types.ts              # 型定義
+│   ├── constants.ts          # 定数
+│   ├── mock-data.ts          # ダミーデータ
+│   └── utils.ts              # ユーティリティ
+└── stores/
+    ├── auth-store.ts         # 認証ストア
+    └── ui-store.ts           # UIストア
+```
+
+## 今後の拡張案
+
+1. **Supabase連携** - PostgreSQL DB / Auth / Storage の本番接続
+2. **通知機能** - 承認依頼・差し戻し時のメール・Slack通知
+3. **SNS API連携** - Instagram / X / TikTok APIでの自動投稿
+4. **AI文章生成** - ChatGPT APIを使った投稿文・リリース下書き自動生成
+5. **ダッシュボードカスタマイズ** - ウィジェットの並び替え・非表示
+6. **コメント・チャット機能** - 案件ごとの社内コミュニケーション
+7. **監査ログ** - 操作履歴の記録
+8. **印刷用レポート** - PDF出力テンプレート
+9. **カレンダー連携** - Google Calendar / Outlook との同期
+10. **多言語対応** - 英語UIの追加
