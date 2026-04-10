@@ -33,9 +33,10 @@ yarn-error.log*
 # env files (can opt-in for committing if needed)
 .env*
 
-# vercel / cloudflare next-on-pages
+# vercel / cloudflare
 .vercel
 .cloudflare
+.open-next
 
 # typescript
 *.tsbuildinfo
