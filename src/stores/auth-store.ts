@@ -18,6 +18,7 @@ interface AuthState {
   profile: Profile | null;
   isAuthenticated: boolean;
   isLoading: boolean;
+  _initialized: boolean;
   initialize: () => Promise<void>;
   login: (email: string, password: string) => Promise<{ error?: string }>;
   signup: (email: string, password: string, name: string, role?: string) => Promise<{ error?: string }>;
@@ -30,8 +31,13 @@ export const useAuthStore = create<AuthState>((set, get) => ({
   profile: null,
   isAuthenticated: false,
   isLoading: true,
+  _initialized: false,
 
   initialize: async () => {
+    // 二重初期化を防止（onAuthStateChange の重複登録を避ける）
+    if (get()._initialized) return;
+    set({ _initialized: true });
+
     const supabase = createClient();
     const { data: { user } } = await supabase.auth.getUser();
     if (user) {

@@ -1,0 +1,9 @@
+name = "pr-manager"
+compatibility_date = "2024-09-23"
+compatibility_flags = ["nodejs_compat"]
+pages_build_output_dir = ".vercel/output/static"
+
+# 環境変数はCloudflareダッシュボードで設定してください
+# Settings > Environment variables にて:
+#   NEXT_PUBLIC_SUPABASE_URL
+#   NEXT_PUBLIC_SUPABASE_ANON_KEY
